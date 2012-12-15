@@ -8,11 +8,11 @@ This demo has since been ported to the newest incarnation of the framework: [Emb
 
 Usage
 -----
-   0. [Download and unzip the project](https://github.com/adamjmurray/Ember-Drum-Sequencer/zipball/master)
+   0. Open the app here]([http://adamjmurray.github.com/Ember-Drum-Sequencer). You may need to give it a moment to initialize.
 
-   0. Open the drum_sequencer.html file (for best results, use Chrome or Safari). You may need to give it a couple seconds to initialize.
+   0. Click some buttons in the grid
 
-   0. Click some buttons in the grid, and then press the "play" button (the triangle-shaped button under the "Playback Controls" section)
+   0. Press the "play" button (the triangle-shaped button under the "Playback Controls" section)
 
 
 Features
@@ -45,7 +45,7 @@ Browser Compatibility
 ---------------------
    * The demo runs best in WebKit-based browsers (Chrome and Safari). 
 
-   * Chrome sometimes randomly crashes when attempting to load too much HTML5 audio at once... refresh a couple times and it should work? The intialization of the app could probably be optimized to work around this, but I believe its a bug in Chrome and *they* should deal with it.
+   * Chrome sometimes randomly crashes when attempting to load too much HTML5 audio at once, especially when developing locally. Refresh a couple times and it should work? The intialization of the app could probably be optimized to work around this, but I believe its a bug in Chrome and *they* should deal with it.
 
    * It works in Firefox, but I made use of the [range input](http://www.w3.org/wiki/HTML/Elements/input/range), which is not yet supported in Firefox. So these degrade to a text input. It's not as nice, but it works.
 
