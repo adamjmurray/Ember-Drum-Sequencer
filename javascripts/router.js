@@ -4,16 +4,21 @@ DS.Router = Ember.Router.extend({
     application: Ember.Route.extend({
       route: '/',
   
-      connectOutlets: function(router) {        
-        var transportController = router.get('transportController');
-        transportController.connectControllers('pattern')
+      connectOutlets: function(router) {      
+        if(!this.get('initialized')) {
+          console.log('initializing...');
+          var transportController = router.get('transportController');
+          transportController.connectControllers('pattern')
 
-        var patternController = router.get('patternController');
-        patternController.connectControllers('transport')
+          var patternController = router.get('patternController');
+          patternController.connectControllers('transport')
 
-        var applicationController = router.get('applicationController');
-        applicationController.connectOutlet('patternView', 'pattern');
-        applicationController.connectOutlet('transportView', 'transport');                    
+          var applicationController = router.get('applicationController');
+          applicationController.connectOutlet('patternView', 'pattern');
+          applicationController.connectOutlet('transportView', 'transport');                      
+
+          this.set('initialized', true);
+        }        
       },
 
 

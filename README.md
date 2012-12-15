@@ -1,12 +1,14 @@
-SproutCore2 Drum Sequencer 
-==========================
+Ember Drum Sequencer 
+====================
 
-This is a demo application I put together for the [SproutCore Demo App Hackathon](http://demohackathon.strobeapp.com/).
+This is a demo application I originally put together for the "SproutCore 2 Demo App Hackathon" hosted by Strobe. Strobe was later aquired by Facebook so none of the web pages for the contest seem to exist anymore, but you can find my original source here: https://github.com/adamjmurray/SC2-Drum-Sequencer
+
+This demo has since been ported to the newest incarnation of the framework: [Ember.js](http://emberjs.com/). That's what you're looking at here.
 
 
 Usage
 -----
-   0. [Download and unzip the project](https://github.com/adamjmurray/SC2-Drum-Sequencer/zipball/master)
+   0. [Download and unzip the project](https://github.com/adamjmurray/Ember-Drum-Sequencer/zipball/master)
 
    0. Open the drum_sequencer.html file (for best results, use Chrome or Safari). You may need to give it a couple seconds to initialize.
 
@@ -21,32 +23,18 @@ Features
 
    * Pattern state is recorded in the URL hash, so you can save and reload your favorite patterns by bookmarking the URL.
 
-   * Speed (BPM, aka beats per minute) and volume controls are provided.
+   * Playback Speed (BPM, aka beats per minute) 
 
-   * The following [SproutCore 2](http://guides.sproutcore20.com/) features are demonstrated:
-       
-      * View templates and bindings. The main HTML file is beautiful in its simplicity.
-
-      * Enumerable methods, like forEach() and map()
-
-      * OO-style programming, making use of class extension
-
-      * Computed properties. Some use the amazingly powerful '@each' feature for collections (check out how conveniently the URL hash is calculated in the models' serialized() methods)
-
-      * Observers
-
-      * Two-way bindings: the slider controls both get and set model state.
- 
-      * Custom view controls (see javascripts/view/slider.js)
+   * Volume controls are provided.
 
 
 Goals
 -----
-   * Build a pure HTML/CSS/JS drum sequencer (no Flash!) with [SproutCore 2](http://guides.sproutcore20.com/)
+   * Build a pure HTML/CSS/JS drum sequencer (no Flash!) with [Ember](http://emberjs.com/)
 
    * Use good MVC patterns
 
-   * Use minimal markup and no graphics (just CSS)
+   * Use minimal, semantic markup
 
    * Experiment with the latest HTML 5 features and don't worry too much about cross-browser compatibility.
 
@@ -57,18 +45,18 @@ Browser Compatibility
 ---------------------
    * The demo runs best in WebKit-based browsers (Chrome and Safari). 
 
+   * Chrome sometimes randomly crashes when attempting to load too much HTML5 audio at once... refresh a couple times and it should work? The intialization of the app could probably be optimized to work around this, but I believe its a bug in Chrome and *they* should deal with it.
+
    * It works in Firefox, but I made use of the [range input](http://www.w3.org/wiki/HTML/Elements/input/range), which is not yet supported in Firefox. So these degrade to a text input. It's not as nice, but it works.
 
-   * It doesn't work in IE. I think there's a minor bug in the audio playback system (which has nothing to do with SproutCore), but I didn't care enough to debug it. The main UI works, so you can still see that SproutCore is a great platform for cross-browser development.
+   * It doesn't work in IE last time I checked. Very likely has to do with the HTML5 audio. Maybe a recent version of IE10 or even 9 would work. 
 
-   * It doesn't work in iOS. Probably another issue with audio playback that could be sorted out. Again, the SproutCore-based features like the UI all seem to work fine...
+   * It doesn't work in iOS. Probably another issue with HTML5 audio that could be sorted out. Again, the Ember-based features like the UI all seem to work fine...
 
 
 Caveats
 -------
-JavaScript wasn't designed for realtime music applications. You will _not_ get perfect timing. I wouldn't actually write music with an app like this. But it's fun and shows where web technology may take us in the future. 
-
-If someone knows a better way to write a schedulerer in JavaScript besides using setInterval() (maybe with web workers?), let me know!
+JavaScript wasn't designed for realtime music applications. You will _not_ get perfect timing. I wouldn't actually write music with an app like this. But it's fun and shows where web technology may take us in a few years. The "web audio API" looks like a promosing direction for serious audio work in the browser. You can [learn more about HTML5's web audio API here](http://www.html5rocks.com/en/tutorials/webaudio/intro/).
 
 
 Ideas for Features & Improvements
@@ -79,7 +67,7 @@ Want to build on this demo and make it better? Here's some ideas:
 
    * Fix the cross-browser compatibility problems.
 
-   * Remember all application state (BPM, volume, etc) in the URL hash.
+   * Remember BPM in the URL.
 
    * The app loads an audio sample for every step in the grid. This increases start-up time, and won't scale up. It would be better to have a set number of samples (aka "voices") per track. Then we could use a round-robin strategy to select a sample during playback. I'd default to 4, or maybe 8, samples per track. Bonus points for making the number of samples per track configurable.
 
@@ -95,4 +83,4 @@ Meh... I don't care. I built this for the experience. So do whatever you want. L
 If you do something cool with this app, shoot me a note on github. Some credit would be nice too :)
 
 -----------------
-Adam Murray, 2011
+Adam Murray, 2011-2012

@@ -9,14 +9,11 @@ DS.Sample = Ember.Object.extend({
 
 
   init: function() {
-    //var audio = new Audio( this.get('src') );    
-    //this.set('audio', audio);    
-
+    var audio = new Audio( this.get('src') );        
+    /*
     function onProgress() {
       if(audio.networkState == HTMLMediaElement.NETWORK_IDLE) {
         console.log('done loading ' + audio.src)
-        audio.removeEventListener('progress', onProgress, false);
-        audio.removeEventListener('error', onError, false);
       }
     }
 
@@ -34,9 +31,11 @@ DS.Sample = Ember.Object.extend({
       }
     }
     
-    //audio.addEventListener('progress', onProgress, false);
-    //audio.addEventListener('error', onError, false);
-    //audio.load();    
+    audio.addEventListener('progress', onProgress, false);
+    audio.addEventListener('error', onError, false);
+    */
+    audio.load();
+    this.set('audio', audio);       
   },
 
 
@@ -49,13 +48,12 @@ DS.Sample = Ember.Object.extend({
 
   src: function() {
     return 'audio/' + this.get('name') + this.get('filetype');
-  }.property('name').cacheable(),
+  }.property('name','filetype').cacheable(),
 
 
   play: function(volume) {
     if(volume == null || volume > 1) volume = 1;
     if(volume < 0) volume = 0;
-    return;
     
     var audio = this.get('audio');
     audio.pause();
