@@ -15,6 +15,14 @@ DS.TransportController = Ember.Controller.extend({
   patternController: null,
 
 
+  init: function() {
+    var self = this;
+    document.onkeyup = function(e) {
+      if((e.keyCode >= 65 && e.keyCode <= 90) || e.keyCode === 32) self.toggle(); // play/stop on each press of an alphabetic key
+    };
+  },
+
+
   beatDuration: function() {
     return 60000/this.get('bpm');
   }.property('bpm').cacheable(),
