@@ -4,38 +4,33 @@
 DS.PatternController = Ember.Controller.extend({
 
   tracks: null,
-
   
   init: function() {
     var tracks = ['kick', 'snare', 'hat', 'clap'].map(function(name){ return DS.Track.create({name: name}); });
     this.set('tracks', tracks);    
   },
 
-
   stepAt: function(trackIndex, stepIndex) {
     return this.tracks[trackIndex].steps[stepIndex];
   },
 
-
-  updateTrackStates: function(states) {
-    var self = this;
+  /**
+   * Serialize the tracks' state into a list of hexadecimal strings
+   */
+  serialize: function() {
     var tracks = this.get('tracks');
-    states.forEach(function(state, index) {
-      var trackState = self.trackStateHexToBinary(state);
-      var track = tracks[index];
-      for(var i=0,len=trackState.length; i<len; i++) {
-        var stepIsActive = (trackState.charAt(i) === '1');
-        //console.log("setting track " + index + ", step " + i + " isActive to " + stepIsActive);
-        track.get('steps')[i].set('active', stepIsActive);
-      }
-    });    
+    return tracks.map(function(track){ return track.serialize(); });
   },
 
-
-  trackStateHexToBinary: function(hex) {
-    var binary = parseInt(hex,16).toString(2);
-    while(binary.length < DS.STEP_COUNT) binary = '0'+binary;
-    return binary;
+  /**
+   * Set the tracks' state from a list of hexadecimal strings
+   */
+  deserialize: function(hexadecimals) {
+    var self = this;
+    var tracks = this.get('tracks');
+    tracks.forEach(function(track, index) {
+      var hexadecimal = hexadecimals[index];
+      if(hexadecimal) track.deserialize(hexadecimal);      
+    });    
   }
-
 });

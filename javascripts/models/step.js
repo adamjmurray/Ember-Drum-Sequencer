@@ -5,15 +5,15 @@ DS.Step = Ember.Object.extend({
 
   sample: null,
 
-  active: false,
+  isActive: false,
 
 
   toggle: function() {
-    this.set('active', !this.get('active'));
+    this.set('isActive', !this.get('isActive'));
   },
 
   trigger: function() {
-    if(this.get('active')) {
+    if(this.get('isActive')) {
       this.get('sample').play();
     }
   }

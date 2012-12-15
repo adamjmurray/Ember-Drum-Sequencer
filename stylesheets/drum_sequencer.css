@@ -35,11 +35,17 @@ button {
 .pattern .track {
   white-space: nowrap;
 }
-.pattern .track .step {
+.pattern .track li {
   display: inline-block;
   padding: 6px;
 }
-.pattern .track .step button {
+.pattern .track li:nth-child(4n) {
+  border-right: 4px double #445566;
+}
+.pattern .track li:last-child {
+  border: none;
+}
+.pattern .track button {
   width: 50px;
   height: 50px;
   background: #bbbbbb;
@@ -48,20 +54,14 @@ button {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
-.pattern .track .step button:hover {
+.pattern .track button:hover {
   background: #eeeeee;
 }
-.pattern .track .step.active button {
+.pattern .track button.is-active {
   background: #bbffbb;
 }
-.pattern .track .step.active button:hover {
+.pattern .track button.is-active :hover {
   background: #eeffee;
-}
-.pattern .track .step:nth-child(4n) {
-  border-right: 4px double #445566;
-}
-.pattern .track .step:last-child {
-  border: none;
 }
 .pattern .track > span {
   width: 70px;
