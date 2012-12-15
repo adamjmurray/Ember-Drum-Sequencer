@@ -31,12 +31,15 @@
       {{track.name}}
       <ol>
       {{#each step in track.steps}}
-        <li><button {{bindAttr class="step.isActive"}} {{action toggleStep step}}></button></li>
+        <li class="step">
+          <button {{bindAttr class="step.isActive"}} {{action toggleStep step}}></button>
+        </li>
       {{/each}}
       </ol>
     </li>
   {{/each}}
   </ul>
+  <div class="highlight" {{bindAttr style="view.highlightStyle" }}/>
 </script>
 
 

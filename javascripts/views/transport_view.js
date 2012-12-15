@@ -4,6 +4,6 @@ DS.TransportView = Ember.View.extend({
 
   classNames: ['transport'],
 
-  classNameBindings: ['transport.playing'],
+  classNameBindings: ['controller.isPlaying'],
 
 });

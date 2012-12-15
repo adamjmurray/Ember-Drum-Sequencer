@@ -10,7 +10,6 @@ var DS = Ember.Application.create({
 
 });
 
-
 DS.ApplicationController = Ember.Controller.extend();
 
 DS.ApplicationView = Ember.View.extend({templateName: 'application'});

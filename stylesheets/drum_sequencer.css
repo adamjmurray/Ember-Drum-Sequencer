@@ -28,7 +28,7 @@ button {
   cursor: pointer;
 }
 
-.pattern .tracks {
+.pattern {
   position: relative;
   padding-bottom: 5px;
 }
@@ -82,7 +82,7 @@ button {
   -moz-border-radius: 16px;
   -webkit-border-radius: 16px;
   border: 1px solid lightgray;
-  visibility: hidden;
+  pointer-events: none;
 }
 
 .transport {
@@ -124,6 +124,6 @@ button {
   clear: left;
 }
 
-.transport.playing button.play {
+.transport.is-playing button.play {
   color: green;
 }

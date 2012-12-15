@@ -4,15 +4,27 @@
 DS.PatternController = Ember.Controller.extend({
 
   tracks: null,
-  
+
+  transportController: null,
+
+  isPlayingBinding: 'transportController.isPlaying',
+
+  currentStepIndexBinding: 'transportController.currentStepIndex',
+
+
   init: function() {
     var tracks = ['kick', 'snare', 'hat', 'clap'].map(function(name){ return DS.Track.create({name: name}); });
     this.set('tracks', tracks);    
   },
 
-  stepAt: function(trackIndex, stepIndex) {
-    return this.tracks[trackIndex].steps[stepIndex];
+  
+  playStep: function(stepIndex, volume) {
+    if(stepIndex < 0 || stepIndex >= DS.STEP_COUNT) return;
+    this.get('tracks').forEach(function(track) {
+      track.get('steps')[stepIndex].play(volume);
+    });
   },
+
 
   /**
    * Serialize the tracks' state into a list of hexadecimal strings

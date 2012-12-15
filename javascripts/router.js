@@ -4,7 +4,13 @@ DS.Router = Ember.Router.extend({
     application: Ember.Route.extend({
       route: '/',
   
-      connectOutlets: function(router) {
+      connectOutlets: function(router) {        
+        var transportController = router.get('transportController');
+        transportController.connectControllers('pattern')
+
+        var patternController = router.get('patternController');
+        patternController.connectControllers('transport')
+
         var applicationController = router.get('applicationController');
         applicationController.connectOutlet('patternView', 'pattern');
         applicationController.connectOutlet('transportView', 'transport');                    

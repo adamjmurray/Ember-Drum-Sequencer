@@ -4,55 +4,61 @@
  */
 DS.TransportController = Ember.Controller.extend({
 
-  currentStep: -1,
-
   bpm: 120,
 
   volume: 0.25,
 
-  playing: false,
+  isPlaying: false,
 
-  pattern: null,
-
-  _bpmChanged: false,
+  currentStepIndex: -1,
   
-
-  init: function() {
-    this.set('target', this);
-  },
+  patternController: null,
 
 
-  period: function() {
-    return 60000/this.bpm;
+  beatDuration: function() {
+    return 60000/this.get('bpm');
   }.property('bpm').cacheable(),
+
+  setBpm: function(event) {
+    var bpm = event.target.value;
+    if(bpm < DS.MIN_BPM) bpm = DS.MIN_BPM;
+    if(bpm > DS.MAX_BPM) bpm = DS.MAX_BPM;
+    this.set('bpm', bpm);
+    this._bpmChanged = true;    
+  },
 
 
   volumePercentage: function() {
     return Math.round( this.get('volume') * 100 );    
   }.property('volume').cacheable(),
 
+  setVolumePercentage: function(event) {
+    var volume = event.target.value / 100;
+    if(volume < 0) volume = 0;
+    if(volume > 1) volume = 1;
+    this.set('volume', volume);
+  },
+
 
   play: function() {
-    if(!this.playing) {
-      this.set('currentStep', -1);
-      this.set('playing', true);
+    if(!this.get('isPlaying')) {
+      this.set('currentStepIndex', -1);
+      this.set('isPlaying', true);
       this._scheduleStepping();
     }
   },
 
-
   stop: function() {
-    if(this.get('playing')) {
-      clearInterval(this.scheduler);
-      this.schedulerer = null;
-      this.set('currentStep', -1);
-      this.set('playing', false);
+    if(this.get('isPlaying')) {
+      clearInterval(this._scheduler);
+      this._schedulerer = null;
+      this.set('currentStepIndex', -1);
+      this.set('isPlaying', false);
     }
   },
 
-
   toggle: function() {
-    if(this.get('playing')) {
+    if(this.get('isPlaying')) {
       this.stop();
     } else {
       this.play();
@@ -61,38 +67,21 @@ DS.TransportController = Ember.Controller.extend({
 
 
   step: function() {
-    var step = (this.get('currentStep')+1) % DS.STEP_COUNT;
-    this.set('currentStep', step);
-    this.pattern.tracks.forEach(function(track) {
-      track.steps[step].trigger();
-    });
+    var stepIndex = (this.get('currentStepIndex')+1) % DS.STEP_COUNT;
+    this.set('currentStepIndex', stepIndex);
+    this.get('patternController').playStep(stepIndex, this.get('volume'));
     if(this._bpmChanged) this._scheduleStepping();
   },
 
 
   _scheduleStepping: function() {
-    if(this.scheduler) clearInterval(this.scheduler);
+    if(this._scheduler) clearInterval(this._scheduler);
+    
     var self = this;
-    this.scheduler = setInterval(function(){self.step()}, this.get('period')/4);
-    // we divide period by 4 to make each step 1/4 of a beat
+    var duration = this.get('beatDuration')/4; // each step is 1/4 of a beat    
+    this._scheduler = setInterval(function(){ self.step(); }, duration);
+    
     this._bpmChanged = false;
-  },
-  
-  setBpm: function(event) {
-    var bpm = event.target.value;
-    if(bpm < DS.MIN_BPM) bpm = DS.MIN_BPM;
-    if(bpm > DS.MAX_BPM) bpm = DS.MAX_BPM;
-    this.setProperties({
-      'bpm': bpm,
-      '_bpmChanged': true
-    });
-  },
-
-  setVolumePercentage: function(event) {
-    var volume = event.target.value / 100;
-    if(volume < 0) volume = 0;
-    if(volume > 100) volume = 100;
-    this.set('volume', volume);
   }
+  
 });
-

@@ -12,9 +12,9 @@ DS.Step = Ember.Object.extend({
     this.set('isActive', !this.get('isActive'));
   },
 
-  trigger: function() {
+  play: function(volume) {
     if(this.get('isActive')) {
-      this.get('sample').play();
+      this.get('sample').play(volume);
     }
   }
 

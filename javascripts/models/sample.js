@@ -53,8 +53,10 @@ DS.Sample = Ember.Object.extend({
 
 
   play: function(volume) {
-    if(volume == null) volume = 1;
-    volume *= DS.transport.get('volume'); // scale by global volume
+    if(volume == null || volume > 1) volume = 1;
+    if(volume < 0) volume = 0;
+    return;
+    
     var audio = this.get('audio');
     audio.pause();
     audio.currentTime = 0;
