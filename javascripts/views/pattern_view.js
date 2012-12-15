@@ -4,7 +4,7 @@
  */
 DS.PatternView = Ember.View.extend({
 
-  template: Ember.Handlebars.compile('<ul>{{#each tracks}}{{view DS.TrackView}}{{/each}}</ul>'),
+  templateName: 'pattern',
 
   classNames: ['pattern'],
 
