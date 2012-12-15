@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ember Drum Sequencer</title>
+
+	<link href="stylesheets/drum_sequencer.css" media="screen" rel="stylesheet" type="text/css" />
+
+  <script src="javascripts/vendor/jquery-1.8.3.min.js" type="text/javascript"></script>
+  <script src="javascripts/vendor/handlebars-1.0.rc.1.js" type="text/javascript"></script>
+  <script src="javascripts/vendor/ember-1.0.0-pre.2.min.js" type="text/javascript"></script>
+  
+  <!-- Note: we'd typically concatenate/minify all these files into a single javascript file. 
+       We don't do that for clarity in this demo. -->
+  <script src="javascripts/application.js" type="text/javascript"></script>
+  
+  <script src="javascripts/models/track.js" type="text/javascript"></script>
+  <script src="javascripts/models/step.js" type="text/javascript"></script>
+  <script src="javascripts/models/sample.js" type="text/javascript"></script>
+  
+  <script src="javascripts/controllers/pattern_controller.js" type="text/javascript"></script>
+  <script src="javascripts/controllers/transport_controller.js" type="text/javascript"></script>
+
+  <script src="javascripts/views/pattern_view.js" type="text/javascript"></script>
+  <script src="javascripts/views/track_view.js" type="text/javascript"></script>  
+  <script src="javascripts/views/step_view.js" type="text/javascript"></script>
+  <script src="javascripts/views/transport_view.js" type="text/javascript"></script>
+</head>
+<body>
+	
+	<script type="text/x-handlebars" data-template-name="application">
+    <h1>Ember Drum Sequencer Demo</h1>
+
+    <h2>Drum Pattern</h2>       
+		{{outlet patternView}}
+
+    <p><em>activate buttons to trigger drum sounds during playback</em></p>
+
+    <h2>Playback Controls</h2>
+    {{outlet transportView}}
+    <p><em>keyboard shortcuts: any alphabetic key &rarr; play/stop</em></p>
+
+    <footer>
+      Created by Adam Murray, 2011-2012
+    </footer>
+	</script>
+
+  <script type="text/x-handlebars" data-template-name="transport">
+    <button class="stop" title="stop" {{action stop target="controller"}}/>
+    <button class="play" title="play" {{action play target="controller"}}/>
+    
+    <div class="slider">
+      <label for="bpm">BPM: {{bpm}}</label>
+      <input name="bpm" type="range" {{bindAttr min="DS.MIN_BPM" max="DS.MAX_BPM" value="bpm"}} {{action setBpm target="controller" on="change"}}/>
+    </div>
+    
+    <div class="slider">    
+      <label for="volume">Volume: {{volumePercentage}}%</label>
+      <input name="volume" type="range" min="0" max="100" {{action setVolumePercentage target="controller" on="change"}}/>    
+    </div>
+  </script>
+	
+</body>
+</html>
