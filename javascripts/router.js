@@ -13,15 +13,6 @@ DS.Router = Ember.Router.extend({
 
       'default': Ember.Route.extend({
         route: '/',
-
-        connectOutlets: function(router) {
-          router.transitionTo('fourTrackPattern', {
-            track_one:   '0000',
-            track_two:   '0000',
-            track_three: '0000',
-            track_four:  '0000'
-          });
-        }
       }),
 
       fourTrackPattern: Ember.Route.extend({

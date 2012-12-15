@@ -24,7 +24,8 @@ DS.Track = Ember.Object.extend({
     var steps = this.get('steps');
     var binary = steps.map(function(step){ return step.get('isActive') ? '1' : '0'; }).join('');      
     var hexadecimal = parseInt(binary,2).toString(16);          
-    while(hexadecimal.length < 4) hexadecimal = '0'+hexadecimal;
+    var len = this.get('serializedLength');
+    while(hexadecimal.length < len) hexadecimal = '0'+hexadecimal;
     return hexadecimal;
   },
 
@@ -39,5 +40,10 @@ DS.Track = Ember.Object.extend({
       //console.log("setting step " + index + " to " + (binary.charAt(index) === '1'))
       step.set('isActive', binary.charAt(index) === '1');
     });    
-  }
+  },
+
+  // the number of hexadecimal digits needed to represent the on/off state of all steps in a track
+  serializedLength: function() {    
+    return Math.ceil( Math.log(DS.STEP_COUNT)/Math.log(2) );
+  }.property('DS.STEP_COUNT')
 });
