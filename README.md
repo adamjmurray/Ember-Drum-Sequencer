@@ -8,7 +8,7 @@ This demo has since been ported to the newest incarnation of the framework: [Emb
 
 Usage
 -----
-   0. Open the app here]([http://adamjmurray.github.com/Ember-Drum-Sequencer). You may need to give it a moment to initialize.
+   0. [Open the app here](http://adamjmurray.github.com/Ember-Drum-Sequencer). You may need to give it a moment to initialize.
 
    0. Click some buttons in the grid
 
