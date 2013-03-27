@@ -78,9 +78,9 @@ Want to build on this demo and make it better? Here's some ideas:
 
 License
 -------
-Meh... I don't care. I built this for the experience. So do whatever you want. Let's say this code is released under the [MIT license](http://www.opensource.org/licenses/mit-license.php). 
+See license.txt
 
-If you do something cool with this app, shoot me a note on github. Some credit would be nice too :)
+If you do something cool with this app, let me know!
 
 -----------------
-Adam Murray, 2011-2012
+Adam Murray, 2011-2013
